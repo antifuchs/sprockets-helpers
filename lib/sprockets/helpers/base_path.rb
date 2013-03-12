@@ -40,7 +40,9 @@ module Sprockets
       # Hook for rewriting the host.
       def rewrite_host # :nodoc:
         if host = compute_asset_host
+          host, port = host.split(":")
           uri.host = host
+          uri.port = port.to_i if port
           uri.scheme = compute_scheme
         end
       end
